@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redes Sociais & Saúde Mental — Guia de Revisão</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e0c;
+    --surface: #1a1917;
+    --surface2: #242220;
+    --border: #2e2c29;
+    --accent: #c8f25a;
+    --accent2: #f2a93b;
+    --accent3: #5ac8f2;
+    --text: #e8e4dc;
+    --text-dim: #8a8580;
+    --text-faint: #4a4845;
+    --danger: #f25a5a;
+    --tag-bg: #252320;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    padding: 3rem 2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(200,242,90,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text);
+    max-width: 700px;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .header-sub {
+    margin-top: 1rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    max-width: 500px;
+  }
+  .geat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .geat-badge span { color: var(--accent); font-weight: 500; }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,14,12,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 2rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  /* MAIN */
+  .main { max-width: 860px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* SECTION */
+  .section {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    display: none;
+  }
+  .section.active { display: block; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+  .card.accent2::before { background: var(--accent2); }
+  .card.accent3::before { background: var(--accent3); }
+  .card.danger::before { background: var(--danger); }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .card-title .icon {
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+
+  .card p { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 0.75rem; }
+  .card p:last-child { margin-bottom: 0; }
+  .card strong { color: var(--text); font-weight: 500; }
+
+  /* QUOTE BLOCK */
+  .quote {
+    border-left: 3px solid var(--accent2);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: var(--surface2);
+  }
+  .quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 0.3rem !important;
+  }
+  .quote .source {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    font-style: normal;
+  }
+
+  /* STAT CHIPS */
+  .stats-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+  }
+  .stat-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    flex: 1;
+    min-width: 140px;
+  }
+  .stat-chip .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+  .stat-chip.orange .number { color: var(--accent2); }
+  .stat-chip.blue .number { color: var(--accent3); }
+  .stat-chip .label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    line-height: 1.4;
+  }
+
+  /* TAG PILLS */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .tag.highlight { border-color: var(--accent); color: var(--accent); }
+  .tag.orange { border-color: var(--accent2); color: var(--accent2); }
+  .tag.blue { border-color: var(--accent3); color: var(--accent3); }
+
+  /* TERM CARDS — conceitos da moda */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .term-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .term-card:hover { border-color: var(--accent); }
+  .term-card:hover .term-word { color: var(--accent); }
+  .term-word {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    transition: color 0.2s;
+  }
+  .term-pt {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+  .term-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .term-clinico {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .term-clinico strong { color: var(--accent2); font-weight: 500; }
+
+  /* LAW ITEMS */
+  .law-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .law-item:last-child { border-bottom: none; }
+  .law-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent3);
+    white-space: nowrap;
+    padding-top: 0.2rem;
+    min-width: 70px;
+  }
+  .law-content .law-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; }
+  .law-content .law-desc { font-size: 0.8rem; color: var(--text-dim); }
+
+  /* CONSULTORIO */
+  .scenario {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .scenario-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .scenario p { font-size: 0.85rem; color: var(--text-dim); }
+  .scenario .intervention {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .scenario .intervention strong { color: var(--accent); }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: var(--text-faint);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* GEAT SECTION */
+  .geat-box {
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .geat-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    clear: both;
+  }
+  .geat-facts { list-style: none; }
+  .geat-facts li {
+    padding: 0.4rem 0;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .geat-facts li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    margin-top: 0.05rem;
+  }
+
+  /* FRASES FÁCEIS */
+  .phrase-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .phrase-context {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .phrase-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NEWS LINK */
+  .news-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent3);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(90,200,242,0.3);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .news-link:hover { color: var(--text); border-color: var(--text); }
+  .news-link::before { content: '↗'; font-size: 0.65rem; }
+
+  /* ARC / GUIA */
+  .arc {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .arc-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-faint);
+    line-height: 1;
+    float: left;
+    margin-right: 1rem;
+    margin-top: -0.3rem;
+  }
+  .arc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .arc-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: block;
+    clear: both;
+  }
+  .arc p { color: var(--text-dim); font-size: 0.87rem; margin-bottom: 0.65rem; }
+  .arc p:last-child { margin-bottom: 0; }
+  .arc strong { color: var(--text); font-weight: 500; }
+  .arc-flow {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin: 0.75rem 0;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .arc-flow-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text);
+    padding: 0.2rem 0.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+  .arc-flow-arrow {
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .crossing {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .crossing.orange { border-left-color: var(--accent2); }
+  .crossing.blue { border-left-color: var(--accent3); }
+  .crossing-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .crossing.orange .crossing-label { color: var(--accent2); }
+  .crossing.blue .crossing-label { color: var(--accent3); }
+  .crossing p { font-size: 0.86rem; color: var(--text-dim); line-height: 1.6; }
+  .crossing strong { color: var(--text); font-weight: 500; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+
+  @media (max-width: 600px) {
+    .header { padding: 2rem 1.25rem 1.5rem; }
+    .nav { padding: 0.75rem 1.25rem; }
+    .main { padding: 0 1.25rem 3rem; }
+    .terms-grid { grid-template-columns: 1fr; }
+    .stats-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-meta">Guia de Revisão · Entrevista · Faculdade de Comunicação</div>
+  <h1>Redes Sociais,<br>Algoritmos &amp; <em>Saúde Mental</em></h1>
+  <p class="header-sub">Material de revisão para entrevista sobre os impactos das plataformas digitais no comportamento e bem-estar psicológico.</p>
+  <div class="geat-badge">
+    <span>GEAT</span> · Grupo de Estudos sobre Adições Tecnológicas · desde 2006
+  </div>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showSection('livros')">📚 Os Livros</button>
+  <button class="nav-btn" onclick="showSection('dados')">📊 Dados &amp; Estudos</button>
+  <button class="nav-btn" onclick="showSection('temas')">🧠 4 Temas</button>
+  <button class="nav-btn" onclick="showSection('conceitos')">💬 Conceitos</button>
+  <button class="nav-btn" onclick="showSection('leis')">⚖️ Leis &amp; Debate</button>
+  <button class="nav-btn" onclick="showSection('consultorio')">🛋️ Consultório</button>
+  <button class="nav-btn" onclick="showSection('geat')">🔬 GEAT</button>
+  <button class="nav-btn" onclick="showSection('frases')">💡 Frases-Chave</button>
+  <button class="nav-btn" onclick="showSection('guia')">🎙️ Guia da Entrevista</button>
+</nav>
+
+<main class="main">
+
+  <!-- ===== LIVROS ===== -->
+  <section class="section active" id="livros">
+    <div class="section-label">01 — Referências Bibliográficas</div>
+    <h2 class="section-title">Os Dois Livros-Base</h2>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📖</span> A Sociedade do Cansaço</div>
+      <div class="tags">
+        <span class="tag">Byung-Chul Han</span>
+        <span class="tag">2010 (trad. BR 2015)</span>
+        <span class="tag highlight">Filosofia / Psicologia Social</span>
+      </div>
+      <p><strong>Tese central:</strong> A sociedade contemporânea migrou da "sociedade disciplinar" (Foucault) para a <strong>"sociedade do desempenho"</strong> — onde não há mais o "não podes", mas o "podes, és livre". Essa liberdade excessiva gera autoexploração.</p>
+      <p><strong>Sujeito de desempenho vs. sujeito de obediência:</strong> O indivíduo moderno não é oprimido por um poder externo, mas por si mesmo. A pressão por produtividade, likes, visibilidade digital é internalizada.</p>
+      <p><strong>Burnout como consequência:</strong> O excesso de positividade — estímulos, opções, conexões — esgota o sistema nervoso. O cansaço não é físico, é existencial.</p>
+      <div class="quote">
+        <p>"O excesso de estímulos e informações fragmenta e destrói a atenção. Isso não é fortaleza psíquica — é esgotamento."</p>
+        <span class="source">— Byung-Chul Han, A Sociedade do Cansaço (paráfrase)</span>
+      </div>
+      <p><strong>Conexão com redes sociais:</strong> As plataformas são máquinas de desempenho. O feed infinito, os stories, as métricas de engajamento são a materialização do "imperativo do desempenho" de Han. Produzir conteúdo, reagir, ser visto — incessantemente.</p>
+      <p><strong>Transparência e vigilância:</strong> Han fala sobre a "sociedade da transparência" — a exposição total voluntária. Nas redes, compartilhamos porque somos levados a crer que existir é ser visível.</p>
+    </div>
+
+    <div class="card accent2">
+      <div class="card-title"><span class="icon">📖</span> Geração Ansiosa</div>
+      <div class="tags">
+        <span class="tag">Jonathan Haidt</span>
+        <span class="tag">2024</span>
+        <span class="tag orange">Psicologia Social / Infância</span>
+      </div>
+      <p><strong>Tese central:</strong> A geração nascida após 1996 (Gen Z) foi a primeira a ter a adolescência mediada por smartphones e redes sociais — e isso produziu uma <strong>crise de saúde mental sem precedentes</strong>.</p>
+      <p><strong>4 grandes danos identificados por Haidt:</strong></p>
+      <p>① <strong>Privação de sono</strong> — o uso noturno de telas rouba horas críticas do desenvolvimento</p>
+      <p>② <strong>Privação de experiências reais</strong> — brincadeiras, riscos controlados, autonomia social substituídos por telas</p>
+      <p>③ <strong>Fragmentação da atenção</strong> — incapacidade de concentração sustentada</p>
+      <p>④ <strong>Comparação social constante</strong> — especialmente devastadora para meninas adolescentes</p>
+      <div class="quote">
+        <p>"Entregamos smartphones às crianças no exato momento em que seus cérebros estavam sendo moldados. Foi um experimento não intencional em escala global."</p>
+        <span class="source">— Jonathan Haidt, Geração Ansiosa (paráfrase)</span>
+      </div>
+      <p><strong>Impacto real:</strong> O livro foi um dos motivadores diretos da <strong>lei australiana</strong> que proibiu menores de 16 anos nas redes (2024). Haidt propõe "redesenho social" — devolver infâncias analógicas, postergar o acesso a smartphones.</p>
+      <p><strong>Crítica ao livro:</strong> Alguns pesquisadores questionam a causalidade direta — a correlação entre redes e saúde mental existe, mas o peso do smartphone vs. outros fatores (pandemia, desigualdade, etc.) ainda é debatido. É um ponto honesto a mencionar.</p>
+    </div>
+
+    <div class="divider">conexão entre os dois autores</div>
+
+    <div class="card accent3">
+      <div class="card-title"><span class="icon">🔗</span> Como os dois se conectam</div>
+      <p><strong>Han</strong> é mais filosófico e fala do adulto contemporâneo — a autoexploração, o burnout digital, a perda da subjetividade profunda.</p>
+      <p><strong>Haidt</strong> é mais empírico e fala da adolescência — dados, estudos longitudinais, políticas públicas.</p>
+      <p>Juntos, cobrem o espectro completo: a criança que cresce sem infância analógica (Haidt) vira o adulto que não consegue descansar nem se desconectar (Han).</p>
+    </div>
+  </section>
+
+  <!-- ===== DADOS ===== -->
+  <section class="section" id="dados">
+    <div class="section-label">02 — Evidências Recentes</div>
+    <h2 class="section-title">O Que os Estudos Dizem</h2>
+
+    <div class="stats-row">
+      <div class="stat-chip">
+        <span class="number">45%</span>
+        <div class="label">dos casos de ansiedade em jovens de 15–29 anos relacionados ao uso intensivo de redes (Instituto Cactus / AtlasIntel, 2024)</div>
+      </div>
+      <div class="stat-chip orange">
+        <span class="number">9h</span>
+        <div class="label">tempo médio diário de tela do brasileiro — 3h a mais que a média global (Consumer Pulse, 2025)</div>
+      </div>
+      <div class="stat-chip blue">
+        <span class="number">230%</span>
+        <div class="label">aumento no uso do termo "brain rot" entre 2023 e 2024 (Oxford Dictionary)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Panorama da Saúde Mental 2024 — Brasil</div>
+      <p>O estudo do <strong>Instituto Cactus em parceria com a AtlasIntel</strong> (2024) é uma das referências mais citáveis no contexto brasileiro. Revela que o uso intensivo de redes sociais está diretamente correlacionado ao aumento de transtornos ansiosos em jovens.</p>
+      <p>A <strong>OMS</strong> já emitiu alertas oficiais sobre o uso excessivo de plataformas como fator de risco para saúde mental — especialmente na faixa de 15 a 29 anos.</p>
+    </div>
+
+    <div class="card accent2">
+      <div class="card-title">Mecanismo Neurológico — O Loop da Dopamina</div>
+      <p>As redes são projetadas para acionar o sistema de recompensa dopaminérgico. Curtidas, comentários, seguidores novos — cada notificação libera dopamina de forma imprevisível, o que é exatamente o padrão que cria comportamentos compulsivos.</p>
+      <p>Estudos mostram que esse mecanismo <strong>prejudica a função executiva</strong> — capacidade de focar, planejar e tolerar frustração — com exposição prolongada a estímulos curtos e superficiais (como Reels e TikToks).</p>
+      <p><strong>No consultório:</strong> pacientes relatam dificuldade de ler um livro, assistir um filme sem o celular do lado, manter uma conversa sem checar o telefone — são sinais de comprometimento atencional.</p>
+    </div>
+
+    <div class="card accent3">
+      <div class="card-title">Sono, Cognição e Regulação Emocional</div>
+      <p>Estudo publicado em 2024 demonstra que a hiperconexão interfere diretamente na <strong>qualidade do sono</strong> e na <strong>regulação emocional</strong>. O uso noturno ativa o sistema nervoso no momento em que deveria desacelerar.</p>
+      <p>Uma revisão de 97 estudos (2000–2025) confirma que a prática de <strong>multitarefa digital</strong> compromete a memória de trabalho e a atenção sustentada.</p>
+      <p>Estudo publicado no <strong>BMC Psychology (2025)</strong> mapeou a cadeia: doomscrolling → FOMO + nomofobia → privação de sono → ansiedade. Um ciclo que se autoalimenta.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Uma Nota Metodológica Importante</div>
+      <p>Boa parte dos estudos usa <strong>delineamentos transversais e medidas autorrelatadas</strong>, o que limita conclusões causais definitivas. O campo ainda precisa de mais pesquisas longitudinais.</p>
+      <p>Isso não invalida a preocupação — mas faz de você um especialista mais sólido mencionar essa nuance. <strong>Correlação forte existe. Causalidade ainda está sendo estabelecida com rigor.</strong></p>
+    </div>
+  </section>
+
+  <!-- ===== TEMAS ===== -->
+  <section class="section" id="temas">
+    <div class="section-label">03 — Temas da Entrevista</div>
+    <h2 class="section-title">Os 4 Eixos Centrais</h2>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">😰</span> Ansiedade Digital</div>
+      <div class="tags">
+        <span class="tag highlight">Domínio seu — base sólida</span>
+      </div>
+      <p><strong>O que é:</strong> Conjunto de respostas ansiosas desencadeadas ou amplificadas pelo uso de redes — FOMO, comparação social, pressão por performance digital, hipervigilância ao feed.</p>
+      <p><strong>Como aparece no consultório:</strong> Pacientes chegam com queixa de ansiedade generalizada, mas ao mapear os gatilhos, o padrão digital emerge: checar o celular ao acordar, ansiedade antes de postar, monitoramento obsessivo de métricas.</p>
+      <p><strong>Conexão com Han:</strong> É a "violência da positividade" — a pressão não vem de fora, vem do imperativo internalizado de estar sempre presente, respondendo, engajando.</p>
+    </div>
+
+    <div class="card accent2">
+      <div class="card-title"><span class="icon">📱</span> Dependência Digital</div>
+      <div class="tags">
+        <span class="tag orange">Domínio seu — base sólida</span>
+      </div>
+      <p><strong>O que é:</strong> Incapacidade de controlar o uso da tecnologia quando esse uso está causando impacto negativo nas principais áreas da vida (trabalho, relacionamentos, saúde, sono).</p>
+      <p><strong>Critérios diagnósticos (GEAT/literatura):</strong> tolerância crescente, síndrome de abstinência (irritabilidade, ansiedade sem tela), perda de controle, uso mesmo com consequências negativas.</p>
+      <p><strong>Comorbidades comuns:</strong> TDAH, ansiedade, depressão, TOC aparecem frequentemente associados — mas a relação é bidirecional.</p>
+      <p><strong>Design intencional:</strong> As plataformas usam técnicas derivadas do design de cassinos — scroll infinito (sem ponto de parada natural), notificações de intervalo variável (o padrão mais viciante conhecido na psicologia comportamental), autoplay.</p>
+    </div>
+
+    <div class="card accent3">
+      <div class="card-title"><span class="icon">🫧</span> Bolhas de Conteúdo</div>
+      <div class="tags">
+        <span class="tag blue">Aprofundar — menos domínio</span>
+      </div>
+      <p><strong>Filtro-Bolha (Eli Pariser, 2011):</strong> Os algoritmos de personalização criam uma realidade filtrada, onde cada usuário vê cada vez mais do que já concorda, pensa ou consome — eliminando o contraditório.</p>
+      <p><strong>Câmara de Eco (Echo Chamber):</strong> Ambiente digital onde ideias se auto-reforçam sem contestação. Sunstein (pesquisador da Harvard) demonstra que o isolamento ideológico prolongado tende a radicalizar posições — independente da inclinação política.</p>
+      <p><strong>Como o algoritmo funciona na prática:</strong> O objetivo não é te informar — é maximizar o tempo que você passa na plataforma. Conteúdo que gera reação emocional intensa (raiva, medo, indignação) tem mais engajamento e é amplificado.</p>
+      <p><strong>Impacto psicológico:</strong> A percepção distorcida da realidade (todo mundo pensa como eu, o mundo está pior do que realmente está) alimenta ansiedade, sensação de ameaça constante e desconfiança nas instituições.</p>
+      <p><strong>Complexidade recente:</strong> Pesquisadores da USP e outros grupos questionam se as "bolhas" são tão herméticas quanto se imagina — algoritmos às vezes mostram conteúdo divergente por engajamento. O fenômeno existe, mas é mais poroso do que o senso comum sugere.</p>
+    </div>
+
+    <div class="card danger">
+      <div class="card-title"><span class="icon">🌊</span> Consumo de Informação Filtrada</div>
+      <div class="tags">
+        <span class="tag blue">Aprofundar — menos domínio</span>
+      </div>
+      <p><strong>Infodemia:</strong> Termo da OMS para o excesso de informação — verdadeira e falsa — que torna difícil distinguir fontes confiáveis. Intensificada durante a pandemia e nunca revertida.</p>
+      <p><strong>Doomscrolling:</strong> Rolagem compulsiva por notícias negativas. O cérebro em estado de ameaça percebida busca informação para "resolver" a ameaça — mas o feed de notícias não resolve nada, só amplifica o estado de alerta.</p>
+      <p><strong>Curadoria algorítmica e autonomia cognitiva:</strong> Quando o algoritmo decide o que você vê, ele também está moldando o que você pensa é relevante, urgente, real. É uma questão filosófica e psicológica profunda — a autonomia do sujeito sobre sua própria atenção.</p>
+      <p><strong>No consultório:</strong> Pacientes que chegam exaustos, com sensação de sobrecarga informacional, dificuldade de discernir o que é real. Às vezes a "ansiedade ansiosa" está muito ligada ao consumo de news e redes — um digital detox revela isso rapidamente.</p>
+    </div>
+  </section>
+
+  <!-- ===== CONCEITOS ===== -->
+  <section class="section" id="conceitos">
+    <div class="section-label">04 — Vocabulário Contemporâneo</div>
+    <h2 class="section-title">Conceitos da Moda — Com Profundidade</h2>
+    <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1.5rem;">Termos que podem ser usados naturalmente na entrevista — com contexto clínico, não só definição.</p>
+
+    <div class="terms-grid">
+
+      <div class="term-card">
+        <div class="term-word">Brain Rot</div>
+        <div class="term-pt">"podridão cerebral"</div>
+        <div class="term-desc">Palavra do Ano Oxford 2024. Descreve a deterioração mental percebida causada pelo consumo excessivo de conteúdo trivial e superficial online — Reels, TikToks, memes sem fim.</div>
+        <div class="term-clinico"><strong>No consultório →</strong> Pacientes relatam dificuldade de ler textos longos, assistir filmes sem tela em paralelo, manter conversas profundas. Atenção fragmentada pelo excesso de microdoses de conteúdo.</div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-word">FOMO</div>
+        <div class="term-pt">Fear of Missing Out</div>
+        <div class="term-desc">Medo de estar perdendo algo importante que está acontecendo nas redes enquanto você está offline. Gera checagem compulsiva e ansiedade social.</div>
+        <div class="term-clinico"><strong>No consultório →</strong> Dificuldade de estar presente em momentos reais (festas, reuniões) por ficar monitorando o que acontece online. Associado a ansiedade social e baixa autoestima.</div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-word">Nomofobia</div>
+        <div class="term-pt">No Mobile Phobia</div>
+        <div class="term-desc">Ansiedade ou pânico ao ficar sem o celular — seja sem bateria, sem sinal ou simplesmente longe do aparelho. Já é reconhecida clinicamente como comportamento dependente.</div>
+        <div class="term-clinico"><strong>No consultório →</strong> Pacientes que não conseguem ir ao banheiro sem celular, dormem com o aparelho na mão, entram em pânico com bateria baixa. Sinal de dependência comportamental.</div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-word">Doomscrolling</div>
+        <div class="term-pt">"rolagem do apocalipse"</div>
+        <div class="term-desc">Consumo compulsivo de notícias e conteúdo negativo, mesmo que cause angústia. O cérebro busca "resolver" a ameaça percebida scrollando mais — mas o feed não resolve.</div>
+        <div class="term-clinico"><strong>No consultório →</strong> Pacientes dormindo tarde consumindo notícias ruins. Estudo BMC Psychology (2025): doomscrolling → FOMO + nomofobia → privação de sono → mais ansiedade. Ciclo fechado.</div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-word">Tecnoestresse</div>
+        <div class="term-pt">Technostress</div>
+        <div class="term-desc">Estresse crônico causado pela hiperconexão — excesso de notificações, pressão por resposta imediata, fronteira diluída entre trabalho e vida pessoal.</div>
+        <div class="term-clinico"><strong>No consultório →</strong> Burnout digital. Adultos que não conseguem "desligar" mesmo de férias. Ansiedade ao ver a caixinha de mensagens cheia. Muito presente em profissionais.</div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-word">Phubbing</div>
+        <div class="term-pt">"ignorar com o celular"</div>
+        <div class="term-desc">Ignorar pessoas fisicamente presentes para usar o celular. Neologismo de "phone" + "snubbing" (desdenhar). Destrói vínculos relacionais sem que as pessoas percebam.</div>
+        <div class="term-clinico"><strong>No consultório →</strong> Casais em conflito por phubbing mútuo. Filhos que sentem que os pais preferem o celular a eles. Impacto real na qualidade dos vínculos afetivos.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== LEIS ===== -->
+  <section class="section" id="leis">
+    <div class="section-label">05 — Cenário Regulatório &amp; Notícias</div>
+    <h2 class="section-title">Leis, Debate Global &amp; Movimentos Sociais</h2>
+
+    <!-- OFFLINE CLUB -->
+    <div class="card accent">
+      <div class="card-title">🌿 The Offline Club &amp; Mei Social Vrij — A Reação que Vem da Sociedade</div>
+      <div class="law-item">
+        <div class="law-date">FEV 2024</div>
+        <div class="law-content">
+          <div class="law-title">The Offline Club — Amsterdã, Holanda</div>
+          <div class="law-desc">Três amigos holandeses — Ilya Kneppelhout, Jordy van Bennekom e Valentijn Klok — criaram encontros onde os participantes entregam o celular na entrada e passam horas lendo, desenhando, conversando ou simplesmente sem fazer nada. O 4º Reel que postaram sobre o evento teve 10 milhões de views — irônico e revelador ao mesmo tempo. Já se expandiu para Londres, Paris, Milão, Copenhague, Berlim, Nova York e Lisboa (2025).</div>
+          <div style="margin-top: 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://euronews.com/video/2026/04/08/digital-detox-offline-club-events-in-netherlands-offer-screen-free-social-connection" target="_blank" class="news-link">Euronews — Digital Detox Events</a>
+            <a href="https://www.nit.pt/fora-de-casa/na-cidade/lilly-e-joelle-criaram-um-clube-em-lisboa-com-encontros-onde-o-telemovel-nao-entra" target="_blank" class="news-link">NiT — Offline Club Lisboa</a>
+          </div>
+        </div>
+      </div>
+      <div class="law-item">
+        <div class="law-date">MAIO 2025</div>
+        <div class="law-content">
+          <div class="law-title">Mei Social Vrij — "Maio Livre das Redes"</div>
+          <div class="law-desc">Campanha holandesa que convida pessoas a ficarem sem redes sociais durante todo o mês de maio. Organizada pelo coletivo Droog, inclui evento de kickoff com palestrantes e ex-participantes. Faz parte de um movimento cultural crescente na Europa de "desintoxicação digital coletiva".</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.droog.com/program/mei-social-vrij/" target="_blank" class="news-link">Droog — Mei Social Vrij</a>
+          </div>
+        </div>
+      </div>
+      <div class="law-item" style="border-bottom: none;">
+        <div class="law-date">2025</div>
+        <div class="law-content">
+          <div class="law-title">O Paradoxo que Diz Tudo</div>
+          <div class="law-desc">O Offline Club ganhou 100 mil seguidores no Instagram em um mês divulgando eventos sem celular. Isso captura algo profundo: as pessoas estão usando a mesma ferramenta que as adoece para buscar cura. É ao mesmo tempo sintoma e sinal de consciência. Como os fundadores disseram: "É como colocar avisos de saúde nas redes sociais — só que oferecendo uma alternativa."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUNDO -->
+    <div class="card accent3">
+      <div class="card-title">🌍 No Mundo — Regulação em Marcha</div>
+
+      <div class="law-item">
+        <div class="law-date">NOV 2024</div>
+        <div class="law-content">
+          <div class="law-title">Austrália — Proibição para menores de 16 anos</div>
+          <div class="law-desc">Primeira lei do mundo a banir redes sociais (Instagram, TikTok, YouTube, X, Facebook etc.) para menores de 16 anos — sem exceção, nem com consentimento dos pais. Multas de até AU$ 50 milhões para plataformas. Um dos motivadores diretos: o livro "Geração Ansiosa" de Haidt. Implementação complexa, mas simbolicamente poderosa.</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.cnnbrasil.com.br/internacional/australia-proibe-redes-sociais-para-menores-de-idade-entenda-como-funciona/" target="_blank" class="news-link">CNN Brasil — Lei Australiana</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">SET 2024</div>
+        <div class="law-content">
+          <div class="law-title">OMS Europa — Alerta Oficial Sobre Adolescentes e Telas</div>
+          <div class="law-desc">A Organização Mundial da Saúde (região europeia) publicou documento alertando para o impacto das telas na saúde mental de adolescentes e recomendando políticas públicas mais rigorosas de proteção.</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.who.int/europe/news/item/25-09-2024-teens--screens-and-mental-health" target="_blank" class="news-link">OMS Europa — Teens, Screens and Mental Health</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">2024–25</div>
+        <div class="law-content">
+          <div class="law-title">Reino Unido, Dinamarca, Noruega, Malásia</div>
+          <div class="law-desc">Países que demonstraram interesse ou estão desenvolvendo legislação similar à australiana. Na União Europeia, o Digital Services Act (DSA) já obriga plataformas a maior transparência algorítmica e proteção a menores.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRASIL -->
+    <div class="card">
+      <div class="card-title">🇧🇷 No Brasil — Debate em Andamento</div>
+
+      <div class="law-item">
+        <div class="law-date">SET 2025</div>
+        <div class="law-content">
+          <div class="law-title">CNN Brasil — Redes Sociais Agravam Saúde Mental de Adolescentes</div>
+          <div class="law-desc">Especialistas alertam: o risco é maior entre 12 e 17 anos, fase de desenvolvimento cerebral crítico. O problema não é o tempo de tela isolado, mas a perda de controle, o sofrimento emocional e os prejuízos nas atividades diárias. A comparação com padrões idealizados distorce a percepção de realidade dos jovens.</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.cnnbrasil.com.br/saude/uso-excessivo-de-redes-sociais-agrava-saude-mental-de-adolescentes/" target="_blank" class="news-link">CNN Brasil — Saúde Mental Adolescentes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">DEZ 2024</div>
+        <div class="law-content">
+          <div class="law-title">Lei de restrição de celulares nas escolas</div>
+          <div class="law-desc">O MEC aprovou projeto que restringe o uso de celular nas escolas de educação básica durante o período de aulas — primeira medida regulatória direta no contexto educacional brasileiro.</div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">AGO 2025</div>
+        <div class="law-content">
+          <div class="law-title">Lula anuncia PL de regulação das big techs</div>
+          <div class="law-desc">Governo federal anuncia projeto elaborado por nove ministérios — prevê responsabilização das plataformas por crimes como incitação ao suicídio, pedofilia e conteúdo falso. Debate ainda em andamento no Congresso.</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2025/08/lula-anuncia-projeto-de-lei-para-regular-redes-sociais-201ce-preciso-criar-o-minimo-de-procedimento201d" target="_blank" class="news-link">Governo Federal — Anúncio do PL</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">2024</div>
+        <div class="law-content">
+          <div class="law-title">PL das Fake News — Enterrado</div>
+          <div class="law-desc">O PL 2630 teve urgência aprovada em abril de 2024, mas foi abandonado em maio por falta de articulação política — exemplo claro da dificuldade de regular as plataformas no Brasil.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BETS -->
+    <div class="card danger">
+      <div class="card-title">🎰 Apostas Online (Bets) — O Caso Mais Urgente</div>
+      <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem;">As bets são o exemplo mais cru do mesmo mecanismo das redes sociais — design para criar dependência via dopamina e reforço intermitente. Vale mencionar como ponto de conexão.</p>
+
+      <div class="law-item">
+        <div class="law-date">2018–2025</div>
+        <div class="law-content">
+          <div class="law-title">Mais de 10 mil atendimentos no SUS por jogo patológico</div>
+          <div class="law-desc">Dados do Ministério da Saúde registram 10.553 atendimentos no SUS relacionados a jogo patológico entre 2018 e maio de 2025 — sendo que em 2024 foram 3.490, quase o dobro de 2023. Especialistas acreditam que há subnotificação significativa.</div>
+          <div style="margin-top: 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://hospitalsantamonica.com.br/ludopatia-apostas-online-dependencia-bets-tratamento/" target="_blank" class="news-link">Hospital Santa Mônica — Ludopatia e Bets</a>
+            <a href="https://radis.ensp.fiocruz.br/reportagem/saude-mental-reportagem/epidemia-das-apostas-online/" target="_blank" class="news-link">Fiocruz/Radis — Epidemia das Apostas</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">JUN 2025</div>
+        <div class="law-content">
+          <div class="law-title">CPI das Bets — Arquivada</div>
+          <div class="law-desc">Criada em outubro de 2024 pelo Senado, a CPI das Bets recomendou o indiciamento de 16 pessoas — empresários, donos de plataformas e influenciadores digitais. O relatório foi arquivado em junho de 2025 numa sessão esvaziada, apesar das evidências levantadas.</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.camara.leg.br/noticias/1275222-especialistas-alertam-para-vicio-em-jogos-entre-idosos-e-pedem-regulacao-de-publicidade-das-bets/" target="_blank" class="news-link">Câmara — Especialistas e Regulação das Bets</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item">
+        <div class="law-date">DEZ 2025</div>
+        <div class="law-content">
+          <div class="law-title">Brasil lança Observatório de Apostas Eletrônicas</div>
+          <div class="law-desc">Ministérios da Saúde e da Fazenda criam canal permanente de dados e lançam Linha de Cuidado para dependentes de bets — com teleatendimento pelo SUS a partir de fevereiro de 2026. Mais de 512 mil brasileiros solicitaram autoexclusão das plataformas em apenas 6 meses.</div>
+          <div style="margin-top: 0.5rem;">
+            <a href="https://www.paho.org/pt/noticias/4-12-2025-saude-mental-brasil-lanca-observatorio-apostas-eletronicas-para-acoes-integradas" target="_blank" class="news-link">OPAS/OMS — Observatório Apostas Brasil</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="law-item" style="border-bottom: none;">
+        <div class="law-date">Conexão</div>
+        <div class="law-content">
+          <div class="law-title">Por que trazer bets na entrevista sobre redes sociais?</div>
+          <div class="law-desc">O design das apostas online usa os mesmos mecanismos das redes: reforço intermitente, notificações, scroll infinito, gratificação imediata. A diferença é que o dano financeiro torna a dependência visível mais rápido. As bets são o espelho ampliado do que as redes fazem de forma mais sutil.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent2">
+      <div class="card-title">💬 O Debate de Fundo — O Que Está em Jogo</div>
+      <p><strong>Liberdade de expressão vs. proteção:</strong> Regulação é frequentemente atacada como censura. O argumento oposto: deixar plataformas sem responsabilidade é como não regular a indústria tabagista porque "as pessoas escolhem fumar".</p>
+      <p><strong>Transparência algorítmica:</strong> Uma das demandas mais consensuais — exigir que plataformas expliquem como seus algoritmos funcionam. O Surgeon General dos EUA pediu que redes tenham avisos de saúde como os do cigarro.</p>
+      <p><strong>A crítica técnica:</strong> Especialistas como o Prof. Tama Leaver (Austrália) dizem que as ferramentas de verificação de idade "ainda não funcionam de verdade". A lei existe, mas a implementação é complexa — e isso é honesto de reconhecer.</p>
+      <p><strong>Iniciativas de Leitura:</strong> O artigo da Piauí sobre iniciativas de desconexão aprofunda o contexto cultural do movimento offline — vale como leitura complementar. <a href="https://piaui.uol.com.br/revista/236/por-que-as-iniciativas-para-desconectar-estao-ganhando-tracao/" target="_blank" class="news-link" style="display: inline-flex;">Piauí — Por que as iniciativas de desconexão ganham tração</a></p>
+    </div>
+  </section>
+
+  <!-- ===== CONSULTÓRIO ===== -->
+  <section class="section" id="consultorio">
+    <div class="section-label">06 — Aplicação Clínica</div>
+    <h2 class="section-title">O Que Chega ao Consultório</h2>
+    <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1.5rem;">Cenários genéricos para ilustrar sem identificar pacientes. Use para humanizar os dados.</p>
+
+    <div class="scenario">
+      <div class="scenario-label">Cenário 01 — Ansiedade e Comparação Social</div>
+      <p>Adulto jovem, entre 20 e 30 anos, busca atendimento por "ansiedade sem motivo". No mapeamento, emerge um padrão: compara o próprio progresso de vida com o que vê nas redes — viagens, conquistas, relacionamentos aparentemente perfeitos. Sente que está "atrasado".</p>
+      <div class="intervention"><strong>Intervenção relevante:</strong> Psicoeducação sobre a natureza curada do conteúdo online. Ninguém posta os dias ruins. O que o algoritmo entrega é a highlight reel da humanidade — não a vida real.</div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-label">Cenário 02 — Dificuldade de Atenção / Brain Rot</div>
+      <p>Adolescente (15-17 anos) com queixa de dificuldade de concentração nos estudos. Tenta ler um texto e em 3 minutos já está no celular. Relata que filmes "são lentos demais". Pais preocupados com rendimento escolar.</p>
+      <div class="intervention"><strong>Intervenção relevante:</strong> Treino atencional progressivo. O cérebro foi "retreinado" pelo ritmo do conteúdo curto. Requer exposição gradual a tarefas que exijam atenção sustentada. Não é TDAH — é um padrão aprendido.</div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-label">Cenário 03 — Dependência e Abstinência Digital</div>
+      <p>Adulto que tenta "largar o celular" como resolução de ano novo. Fica irritado, ansioso, não sabe o que fazer com o tempo livre. Sente que está perdendo algo importante. Volta ao uso em 3 dias.</p>
+      <div class="intervention"><strong>Intervenção relevante:</strong> Síndrome de abstinência comportamental — real e documentada. O tratamento não é "parar de vez" mas redução gradual com substituição de comportamentos e reconstrução de fontes de prazer analógicas.</div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-label">Cenário 04 — Sobrecarga Informacional / Doomscrolling</div>
+      <p>Paciente adulto que chega exausto, sobrecarregado, "com a cabeça cheia". Não sabe separar o que é real do que é catastrófico. Dorme mal porque fica no celular lendo notícias. Sente que o mundo "está cada vez pior".</p>
+      <div class="intervention"><strong>Intervenção relevante:</strong> Digital detox estruturado revela melhora rápida no humor e qualidade do sono. Trabalha-se também a intolerância à incerteza — que é o motor do doomscrolling. "Scrollar mais não vai resolver o problema do mundo."</div>
+    </div>
+
+    <div class="scenario">
+      <div class="scenario-label">Cenário 05 — Impacto Relacional / Phubbing</div>
+      <p>Casal em crise: um sente que o outro "não está presente" mesmo quando estão juntos. Jantares em silêncio, cada um no celular. Filhos que sentem que os pais preferem as telas a eles.</p>
+      <div class="intervention"><strong>Intervenção relevante:</strong> A presença física sem presença mental é uma forma de abandono emocional. Trabalho em família / casal para criar acordos de uso — zonas livres de telas, rituais de reconexão analógica.</div>
+    </div>
+  </section>
+
+  <!-- ===== GEAT ===== -->
+  <section class="section" id="geat">
+    <div class="section-label">07 — Sobre o Grupo</div>
+    <h2 class="section-title">Como Apresentar o GEAT</h2>
+
+    <div class="geat-box">
+      <h3>GEAT — Grupo de Estudos sobre Adições Tecnológicas</h3>
+      <ul class="geat-facts">
+        <li>Fundado em <strong>2006</strong> — um dos grupos pioneiros no Brasil no estudo de dependências tecnológicas</li>
+        <li>Surgiu da necessidade de compreender como o uso crescente de internet e jogos eletrônicos afetava a saúde mental de crianças e adolescentes</li>
+        <li>Equipe <strong>multidisciplinar</strong>: psiquiatria, psicologia, nutrição, TI, comunicação, antropologia e educação</li>
+        <li>Vinculado a pesquisadores da <strong>UFRGS / Hospital de Clínicas de Porto Alegre (HCPA)</strong> e ao Instituto Nacional de Psiquiatria do Desenvolvimento</li>
+        <li>Mantém o portal <strong>dependenciadetecnologia.digital</strong> com recursos psicoeducativos para pais, professores e profissionais de saúde</li>
+        <li>Publicou artigos em revistas científicas como <em>Debates em Psiquiatria</em> e <em>Revista Brasileira de Psicoterapia</em></li>
+        <li>Encontros quinzenais para discussão de tópicos relevantes na área</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Como inserir naturalmente na entrevista</div>
+      <p><strong>Se perguntarem sobre sua formação/background:</strong> "Faço parte do GEAT — Grupo de Estudos sobre Adições Tecnológicas — desde [ano]. É um grupo pioneiro no Brasil, que estuda esse tema desde 2006, muito antes de vir para o mainstream que vemos hoje."</p>
+      <p><strong>Se citarem um dado:</strong> "Esse dado dialoga com o que a gente observa no GEAT — tanto nas pesquisas quanto nos relatos clínicos dos profissionais que integram o grupo."</p>
+      <p><strong>Para convidar à reflexão:</strong> "O GEAT mantém um portal, dependenciadetecnologia.digital, onde as pessoas podem encontrar informação qualificada sobre o tema — inclusive orientações para pais que estão com dúvidas sobre os limites saudáveis."</p>
+    </div>
+  </section>
+
+  <!-- ===== FRASES ===== -->
+  <section class="section" id="frases">
+    <div class="section-label">08 — Para a Entrevista</div>
+    <h2 class="section-title">Frases-Chave &amp; Ângulos de Resposta</h2>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Quando perguntarem: "As redes são o vilão?"</div>
+      <div class="phrase-text">Não são o vilão — são ferramentas. O problema não é a ferramenta, é o design intencional que maximiza engajamento a qualquer custo, sem considerar o custo psicológico. Um martelo pode construir uma casa ou quebrar uma cabeça — o que importa é quem decide como ele é usado e em qual contexto.</div>
+    </div>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Quando perguntarem sobre responsabilidade</div>
+      <div class="phrase-text">A questão não é só responsabilidade individual — "use com moderação". As plataformas têm bilhões investidos em fazer você ficar mais tempo. É uma disputa desigual. Por isso regulação importa — não para censurar conteúdo, mas para exigir design responsável.</div>
+    </div>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Sobre infância e adolescência</div>
+      <div class="phrase-text">O que vemos no consultório é uma geração que cresceu sem brincar no quintal, sem se entediar, sem resolver conflito sem o celular como escape. O tédio, que parece ruim, é um estado cognitivo essencial para criatividade e processamento emocional. Quando roubamos isso das crianças, há um custo.</div>
+    </div>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Sobre bolhas e polarização</div>
+      <div class="phrase-text">O algoritmo não está tentando te informar — está tentando te manter. E o conteúdo que mais te mantém é o que gera reação emocional intensa: raiva, medo, indignação. Isso tem consequências: as pessoas acreditam que o mundo é mais perigoso, mais polarizado do que realmente é. É uma distorção de realidade em escala global.</div>
+    </div>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Para encerrar / dar esperança</div>
+      <div class="phrase-text">O que a psicologia mostra é que pequenas mudanças fazem diferença real — tirar o celular do quarto à noite, criar refeições sem tela, períodos de desconexão intencional. O cérebro é plástico. A gente pode retreinar a atenção. O desafio é que vivemos numa cultura que recompensa a hiperconexão — e isso é uma questão coletiva, não só individual.</div>
+    </div>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Citando Han naturalmente</div>
+      <div class="phrase-text">O filósofo Byung-Chul Han tem uma observação poderosa: não somos oprimidos por um poder externo — somos explorados por nós mesmos. Nas redes, nós produzimos dados, conteúdo, atenção voluntariamente. Somos simultâneamente o produto e o produtor.</div>
+    </div>
+
+    <div class="phrase-box">
+      <div class="phrase-context">Citando Haidt naturalmente</div>
+      <div class="phrase-text">Jonathan Haidt, que publicou "Geração Ansiosa" em 2024, faz uma analogia forte: damos smartphones para crianças com o mesmo descuido com que distribuímos cigarros para adolescentes nos anos 50. Agíamos sem entender o dano. Agora temos evidências — e precisamos agir.</div>
+    </div>
+
+  </section>  <!-- ===== GUIA DA ENTREVISTA ===== -->
+  <section class="section" id="guia">
+    <div class="section-label">09 — Guia da Entrevista</div>
+    <h2 class="section-title">Como Conduzir a Conversa</h2>
+    <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 2rem;">Não é um roteiro para decorar — é uma forma de pensar os temas em movimento. Três arcos narrativos que podem entrar em qualquer ordem, com cruzamentos que mostram domínio do assunto sem soar técnico demais.</p>
+
+    <!-- ABERTURA -->
+    <div class="crossing blue" style="margin-bottom: 1.5rem;">
+      <div class="crossing-label">Como abrir a entrevista — âncora geral</div>
+      <p>Uma forma natural de entrar no tema: <strong>"A gente está vivendo um momento em que os efeitos do que foi uma decisão de design virou uma questão de saúde pública."</strong> Isso contextualiza sem precisar listar dados — e já sinaliza que você vai falar de estrutura, não de culpa individual.</p>
+    </div>
+
+    <!-- ARC 1 -->
+    <div class="arc">
+      <div class="arc-number">01</div>
+      <div class="arc-title">O Problema — De Onde Veio Esse Cansaço Todo</div>
+      <span class="arc-subtitle">Use quando: a entrevistadora perguntar sobre impactos gerais, ansiedade, dependência</span>
+
+      <p>O ponto de partida é entender que a hiperconexão não é uma falha de caráter das pessoas — é uma resposta previsível a sistemas desenhados para isso. As plataformas usam os mesmos princípios de design de cassinos: <strong>reforço intermitente</strong> (notificações imprevisíveis), <strong>scroll infinito</strong> (sem ponto natural de parada), <strong>métricas de validação social</strong> (likes, seguidores). O cérebro responde a isso com dopamina — e aí começa o ciclo.</p>
+
+      <div class="arc-flow">
+        <span class="arc-flow-item">Design intencional</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Loop dopaminérgico</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Dependência comportamental</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Ansiedade / Brain Rot</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Consultório</span>
+      </div>
+
+      <p>O que isso produz no consultório? Pacientes que chegam com queixa de "ansiedade sem motivo" — mas ao mapear a rotina digital, tudo se encaixa. A pessoa que não consegue ler três parágrafos sem checar o celular não tem necessariamente TDAH: <strong>seu cérebro foi retreinado pelo ritmo do conteúdo curto.</strong> É um padrão aprendido, e pode ser desaprendido.</p>
+
+      <p>Byung-Chul Han diagnosticou isso filosoficamente há quinze anos: vivemos numa <strong>sociedade do desempenho</strong>, onde o imperativo não vem de fora — vem de dentro. Ninguém te obriga a postar, a responder, a estar disponível. Mas a pressão internalizada é real. Isso é o que ele chama de autoexploração.</p>
+    </div>
+
+    <!-- ARC 2 -->
+    <div class="arc">
+      <div class="arc-number">02</div>
+      <div class="arc-title">O Paradoxo — As Pessoas Estão Reagindo</div>
+      <span class="arc-subtitle">Use quando: a conversa pedir um ângulo mais esperançoso, ou ao falar de movimentos sociais</span>
+
+      <p>Algo interessante está acontecendo: <strong>as mesmas pessoas que estão exaustas estão criando o antídoto.</strong> O Offline Club nasceu em Amsterdã em 2024 — três amigos holandeses que criaram encontros onde o celular fica na porta. As pessoas chegam, entregam o aparelho, e passam duas horas lendo, desenhando, conversando.</p>
+
+      <p>Em um mês, ganharam 100 mil seguidores no Instagram divulgando eventos sem celular. Isso captura algo muito humano: <strong>a consciência do problema e o desejo de mudança existem — o que falta às vezes é estrutura coletiva para isso.</strong> O clube oferece essa estrutura. Hoje já tem capítulos em Lisboa, Paris, Milão, Nova York.</p>
+
+      <div class="arc-flow">
+        <span class="arc-flow-item">FOMO</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Esgotamento</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Consciência</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">JOMO</span>
+        <span class="arc-flow-arrow">→</span>
+        <span class="arc-flow-item">Offline Club</span>
+      </div>
+
+      <p>É a passagem do <strong>FOMO</strong> (Fear of Missing Out — medo de perder algo online) para o <strong>JOMO</strong> (Joy of Missing Out — a alegria de estar desconectado intencionalmente). Não é negação da tecnologia — é recusa ao consumo passivo e compulsivo. É uma distinção clínica importante: uso consciente versus uso compulsivo.</p>
+
+      <p>Na Holanda existe também o <strong>Mei Social Vrij</strong> — "Maio Livre das Redes" — uma campanha nacional onde as pessoas se comprometem a ficar sem redes sociais por um mês inteiro. Esse tipo de movimento coletivo tem impacto diferente do esforço individual isolado, que quase sempre falha. <strong>A desconexão funciona melhor como prática social do que como resolução de ano novo.</strong></p>
+    </div>
+
+    <!-- ARC 3 -->
+    <div class="arc">
+      <div class="arc-number">03</div>
+      <div class="arc-title">A Resposta Institucional — O Mundo Começa a Agir</div>
+      <span class="arc-subtitle">Use quando: a conversa entrar em regulação, políticas públicas, proteção de menores</span>
+
+      <p>A Austrália fez algo historicamente inédito em novembro de 2024: proibiu por lei o acesso de menores de 16 anos a todas as principais redes sociais — sem exceção, nem com consentimento dos pais. Uma das inspirações diretas foi o livro de Jonathan Haidt. <strong>Estamos vendo um livro de psicologia social influenciar legislação nacional.</strong> Isso não é comum.</p>
+
+      <p>No Brasil o debate avança, mas devagar. Temos a lei que retirou o celular das escolas, um projeto de regulação das big techs em elaboração, e o caso das apostas online — que talvez seja o exemplo mais visível do mesmo problema. <strong>As bets usam os mesmos mecanismos das redes:</strong> reforço intermitente, design para maximizar tempo de uso, exploração de vulnerabilidades emocionais. A diferença é que o dano financeiro aparece mais rápido e é mais fácil de medir.</p>
+
+      <p>O SUS registrou mais de 10 mil atendimentos por jogo patológico entre 2018 e 2025 — e o governo criou um observatório específico e linha de cuidado para dependentes. Isso é relevante para a psicologia clínica: <strong>a rede pública começa a absorver o custo psicológico do design irresponsável das plataformas.</strong></p>
+
+      <p>Mas regulação sem cultura é insuficiente. A Austrália proibiu — e crianças ainda estão online. A pergunta mais profunda é: como criamos uma cultura digital saudável, não só regras? Isso é onde a psicologia e a educação têm um papel central que nenhuma lei substitui.</p>
+    </div>
+
+    <!-- CRUZAMENTOS -->
+    <div class="section-label" style="margin-top: 2rem; margin-bottom: 1rem;">Cruzamentos que mostram profundidade</div>
+
+    <div class="crossing">
+      <div class="crossing-label">Han + Brain Rot + Offline Club — O mesmo fenômeno em três camadas</div>
+      <p>Han descreveu o esgotamento da sociedade de desempenho em <strong>2010</strong>. O brain rot nomeou culturalmente o sintoma em <strong>2024</strong> (Palavra do Ano Oxford). O Offline Club é a resposta comportamental coletiva em <strong>2025</strong>. São três respostas ao mesmo problema — filosófica, cultural e social — com 15 anos de intervalo.</p>
+    </div>
+
+    <div class="crossing orange">
+      <div class="crossing-label">Dependência digital + Bets — O mesmo mecanismo, intensidades diferentes</div>
+      <p>Redes sociais e apostas online compartilham a mesma arquitetura de dependência: reforço intermitente, ausência de ponto de parada natural, exploração do sistema de recompensa dopaminérgico. A diferença é que as bets tornam o dano financeiramente visível mais rápido. <strong>Entender um ajuda a entender o outro.</strong></p>
+    </div>
+
+    <div class="crossing blue">
+      <div class="crossing-label">Bolha de filtro + Doomscrolling + Ansiedade — O ciclo da distorção</div>
+      <p>O algoritmo entrega o que gera mais engajamento → conteúdo alarmante domina o feed → pessoa entra em estado de ameaça percebida → busca mais informação para "resolver" → mais doomscrolling → mais ansiedade → distorção da percepção de realidade. <strong>No consultório, isso aparece como "o mundo está piorando" — quando o que está mudando é o feed.</strong></p>
+    </div>
+
+    <div class="crossing">
+      <div class="crossing-label">Haidt + Geração Z + Movimento Offline — O custo e a resposta</div>
+      <p>Haidt documentou o custo psicológico da infância mediada por smartphones. A Geração Z — a mais afetada — é também a que está criando o Offline Club, o JOMO, os "dumb phones". <strong>A geração que cresceu mais conectada é a mesma que está inventando maneiras de se desconectar.</strong> Isso é ao mesmo tempo trágico e esperançoso.</p>
+    </div>
+
+    <!-- FECHAMENTO SUGERIDO -->
+    <div class="card accent2" style="margin-top: 2rem;">
+      <div class="card-title">🎯 Como Fechar Bem a Entrevista</div>
+      <p>Um encerramento que funciona bem é devolver o tema para o humano, não para a tecnologia: <strong>"No fim das contas, o que a psicologia mostra é que o cérebro é plástico — ele pode ser retreinado. O desafio não é a tecnologia em si, é construir uma cultura que valorize a atenção, o tédio criativo, a presença. E isso é trabalho coletivo: da escola, da família, das políticas públicas e, sim, do consultório."</strong></p>
+      <p>Isso encerra com autoridade sem soar catastrofista. Deixa o GEAT implícito (o consultório, a pesquisa) e devolve agência para as pessoas e para a sociedade — que é onde a mudança real acontece.</p>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
